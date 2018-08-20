@@ -3,9 +3,9 @@
         <my-header></my-header>
         <div class="content">
             <sidebar></sidebar>
-            <section class="section">
+            <div class="section">
                 <router-view></router-view>
-            </section>
+            </div>
         </div>
         <my-footer></my-footer>
     </div>
@@ -38,7 +38,6 @@ export default {
         
         .section {
             flex: 1 0 auto;
-            //background-color: #999999;
         }
     }
 }

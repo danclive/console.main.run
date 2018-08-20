@@ -21,6 +21,7 @@
     "@vue/eslint-config-prettier": "^3.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "svg-sprite-loader": "^3.9.2",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {

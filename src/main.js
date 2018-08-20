@@ -14,6 +14,3 @@ var app = new Vue({
   store,
   render: h => h(App)
 }).$mount("#app");
-
-console.log(app.$router.options.routes)
-console.log(app.$route)

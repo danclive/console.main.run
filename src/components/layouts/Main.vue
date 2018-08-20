@@ -38,6 +38,7 @@ export default {
         
         .section {
             flex: 1 0 auto;
+            padding: 10px;
         }
     }
 }

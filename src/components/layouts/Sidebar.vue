@@ -11,8 +11,6 @@
                         v-for="child in route.children" v-if="!child.hidden"
                         :class="[child.name == $route.name ? 'active': '']"
                     >
-                        <!-- <m-icon v-if="child.meta&&child.meta.icon" :icon-class="child.meta.icon"/> -->
-                        <!-- {{child.meta.title}} -->
                         <router-link :to="{name: child.name}">
                             <m-icon v-if="child.meta&&child.meta.icon" :icon-class="child.meta.icon"/>
                             {{child.meta.title}}
@@ -24,14 +22,10 @@
     </nav>
 </template>
 <script>
-import { clone } from "@/util";
 export default {
     name: "sidebar",
     created() {
-        //console.log(this.$router.options.routes)
-        //console.log(this.$route)
-        //console.log(routes)
-        console.log(clone);
+
     },
     methods: {
         linkTo(name) {

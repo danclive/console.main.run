@@ -30,11 +30,14 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
+      "plugin:vue/essential"
     ],
     "rules": {
-      "indent": [
+      "vue/script-indent": [
+        "error",
+        4
+      ],
+      "vue/html-indent": [
         "error",
         4
       ]

@@ -2,13 +2,13 @@
     <nav class="sidebar">
         <ul class="sidebar-content">
             <li v-for="route in routes" class="group">
-                <div v-if="!route.hidden" class="group-title">
+                <div v-if="!route.hidden&&route.meta" class="group-title">
                     <m-icon v-if="route.meta&&route.meta.icon" :icon-class="route.meta.icon"/>
                     {{route.meta.title}}
                 </div>
                 <ul v-if="!route.hidden">
                     <li
-                        v-for="child in route.children" v-if="!child.hidden"
+                        v-for="child in route.children" v-if="!child.hidden&&child.meta"
                         :class="[child.name == $route.name ? 'active': '']"
                     >
                         <router-link :to="{name: child.name}">
@@ -66,19 +66,6 @@ export default {
 
             ul {
                 li {
-                    //border-left: solid 4px #ffffff;
-                    //transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-                    //cursor: pointer;
-
-                    &:hover {
-                        //background-color: #eee;
-                        //border-left: solid 4px #f58500;
-                    }
-
-                    &.active {
-                        //border-left: solid 4px #17aa56;
-                    }
-
                     a {
                         padding: 5px 0 5px 40px;
                         color: #61686b;

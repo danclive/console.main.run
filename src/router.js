@@ -2,10 +2,11 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Main from "@/components/layouts/Main";
+import LocalStore from "store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: "history",
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
@@ -26,7 +27,7 @@ export default new Router({
             children: [
                 {
                     path: "/",
-                    name: "home_index",
+                    name: "home",
                     component: () => import("@/views/Home"),
                     meta: {
                         title: "首页",
@@ -98,6 +99,10 @@ export default new Router({
                 }
             ]
         }, {
+            path: "/login",
+            name: "login",
+            component: () => import("@/views/Login")
+        }, {
             path: "*",
             name: "404",
             component: Main,
@@ -114,3 +119,19 @@ export default new Router({
         // }
     ]
 });
+
+router.beforeEach((to, form, next) => {
+    if (to.name !== "login") {
+        if (!LocalStore.get("token")) {
+            next({
+                path: "/login"
+            })
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
+export default router;

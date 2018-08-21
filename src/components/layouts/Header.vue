@@ -10,7 +10,14 @@
 </template>
 <script>
 export default {
-
+    mounted() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData() {
+            //console.log(this.$store.state.user.id)
+        }
+    }
 }
 </script>
 

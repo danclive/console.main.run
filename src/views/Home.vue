@@ -1,22 +1,21 @@
 <template>
-    <div class="home">
-        
-    </div>
+    <section class="section">
+
+    </section>
 </template>
 
 <script>
+import { login } from "@/api/user.js";
 export default {
     name: "home",
-    components: {
+    methods: {
 
     }
 };
 </script>
 
 <style lang="stylus" scoped>
-.home {
+.section {
     height: 100%;
-    background-color: #eeeeee;
 }
 </style>
-

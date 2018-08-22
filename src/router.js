@@ -47,7 +47,7 @@ const router = new Router({
                 {
                     path: "/",
                     name: "article_index",
-                    component: () => import("@/views/Home"),
+                    component: () => import("@/views/article/Index"),
                     meta: {
                         title: "文章管理",
                         icon: "form"

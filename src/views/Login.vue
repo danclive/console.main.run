@@ -39,15 +39,14 @@ export default {
 <style lang="stylus" scoped>
 .section {
     height: 100%;
-    background-color: #eeeeee;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .login-form {
-        //height: 300px;
         width: 300px;
         background-color: #ffffff;
+        border: 1px solid #F5F5F5;
         
         .form-lable {
             font-size: 2rem;

@@ -3,7 +3,7 @@
         <my-header></my-header>
         <div class="content">
             <sidebar></sidebar>
-            <div class="section">
+            <div class="container">
                 <router-view></router-view>
             </div>
         </div>
@@ -36,7 +36,7 @@ export default {
         flex: 1 0 auto;
         display: flex;
         
-        .section {
+        .container {
             flex: 1 0 auto;
             padding: 10px;
         }

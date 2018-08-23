@@ -56,7 +56,7 @@ const router = new Router({
                     path: "edit",
                     name: "article_edit",
                     hidden: true,
-                    component: () => import("@/views/Home"),
+                    component: () => import("@/views/article/Edit"),
                     meta: {
                         title: "文章编辑",
                         icon: "form"
@@ -108,15 +108,6 @@ const router = new Router({
             component: Main,
             hidden: true
         }
-        // {
-        //     path: "/about",
-        //     name: "about",
-        //     // route level code-splitting
-        //     // this generates a separate chunk (about.[hash].js) for this route
-        //     // which is lazy-loaded when the route is visited.
-        //     component: () =>
-        //       import(/* webpackChunkName: "about" */ "@/views/About.vue")
-        // }
     ]
 });
 

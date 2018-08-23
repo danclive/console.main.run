@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { login } from "@/api/user.js";
 export default {
     name: "home",
     methods: {

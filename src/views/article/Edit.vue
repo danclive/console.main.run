@@ -1,10 +1,25 @@
 <template>
     <section class="section">
-        <div class="function">
-            
+        <div class="section-content">
+            <div class="wrapper">
+                <div class="title">
+                    <label>标题</label>
+                    <m-input size="big" special lable="标题"></m-input>
+                </div>
+                <div class="description">
+                    <label>摘要</label>
+                    <m-textarea></m-textarea>
+                </div>
+                <label>正文</label>
+                <div class="editor" :class="isFocus ? 'focus': ''">
+                    <code-mirror v-model="content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
+                </div>
+            </div>
         </div>
-        <div class="editor" :class="isFocus ? 'focus': ''">
-            <code-mirror v-model="content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
+        <div class="section-function">
+            <m-button special>发布</m-button>
+            <m-button special>草稿</m-button>
+            <m-button special>预览</m-button>
         </div>
     </section>
 </template>
@@ -26,7 +41,7 @@ export default {
                 styleActiveLine: true,
                 lineNumbers: false,
                 line: true,
-                mode: "text/x-markdown",
+                mode: "gfm",
                 theme: "paraiso-light2",
                 lineWrapping: true,
                 keyMap: "sublime",
@@ -52,7 +67,7 @@ export default {
         }
     },
     mounted() {
-        //hljs.initHighlightingOnLoad();
+
     }
 };
 </script>
@@ -60,15 +75,33 @@ export default {
 <style lang="stylus" scoped>
 .section {
     height: 100%;
+    display: flex;
     
-    .editor {
-        box-shadow: inset 0 0 0 1px #F5F5F5;
-        transition: box-shadow 0.15s ease-in-out;
-        padding: 10px;
-        
-        &.focus {
-            box-shadow: inset 0 0 0 1px #f29e0d;
+    .section-content {
+        flex: 1 0 auto;
+
+        .wrapper {
+            margin: 0 auto;
+            max-width: 760px;
+
+            .editor {
+                //box-shadow: inset 0 0 0 1px #F5F5F5;
+                box-shadow: inset 0 0 0 1px rgba(252, 173, 38, .5);
+                transition: box-shadow 0.15s ease-in-out;
+                padding: 10px;
+                height: 800px;
+                
+                &.focus {
+                    box-shadow: inset 0 0 0 1px #f29e0d;
+                }
+            }
         }
+    }
+    
+    .section-function {
+        //background: #ff6600;
+        flex: 0 0 auto;
+        width: 300px;
     }
 }
 </style>

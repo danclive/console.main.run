@@ -5,13 +5,27 @@
 <script>
 window.CodeMirror = require("codemirror");
 require("codemirror/lib/codemirror.css");
-require("codemirror/mode/meta");
+//require("codemirror/mode/meta");
+require("codemirror/mode/gfm/gfm.js");
+require("codemirror/mode/xml/xml.js");
+require("codemirror/mode/cmake/cmake.js");
+require("codemirror/mode/css/css.js");
+require("codemirror/mode/dart/dart.js");
+require("codemirror/mode/dockerfile/dockerfile.js");
+require("codemirror/mode/go/go.js");
+require("codemirror/mode/javascript/javascript.js");
+require("codemirror/mode/lua/lua.js");
+require("codemirror/mode/nginx/nginx.js");
+require("codemirror/mode/python/python.js");
+require("codemirror/mode/rust/rust.js");
+require("codemirror/mode/stylus/stylus.js");
+require("codemirror/mode/php/php.js");
 
 export default {
     name: "codemirror",
     data: function() {
         return {
-          content: ""
+            content: ""
         };
     },
     props: {
@@ -22,13 +36,13 @@ export default {
         loadtheme: {
             type: Boolean,
             default: function() {
-              return true;
+                return true;
             }
         },
         debugger: {
             type: Boolean,
             default: function() {
-              return true;
+                return true;
             }
         },
         options: {
@@ -37,6 +51,7 @@ export default {
         }
     },
     created: function() {
+        /*
         if (this.options.lineNumbers === undefined) {
             this.options.lineNumbers = true;
         }
@@ -124,6 +139,7 @@ export default {
         if (theme && _loadtheme) {
             //require('codemirror/theme/' + theme + '.css')
         }
+        */
     },
     mounted: function() {
         var _this = this;

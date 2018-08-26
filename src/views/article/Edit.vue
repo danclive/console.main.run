@@ -82,14 +82,14 @@ export default {
 
         .wrapper {
             margin: 0 auto;
-            max-width: 760px;
+            width: 760px;
+            //height: 800px;
 
             .editor {
                 //box-shadow: inset 0 0 0 1px #F5F5F5;
                 box-shadow: inset 0 0 0 1px rgba(252, 173, 38, .5);
                 transition: box-shadow 0.15s ease-in-out;
                 padding: 10px;
-                height: 800px;
                 
                 &.focus {
                     box-shadow: inset 0 0 0 1px #f29e0d;
@@ -109,6 +109,7 @@ export default {
 .cm-s-paraiso-light2.CodeMirror { 
     //background: #e7e9db; 
     color: #41323f;
+    height: 760px;
 }
 .cm-s-paraiso-light2 div.CodeMirror-selected {
     background: #b9b6b0;

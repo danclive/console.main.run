@@ -153,7 +153,7 @@ export default {
             }
         });
 
-        this.editor.setSize("auto", "auto");
+        //this.editor.setSize("auto", 760);
 
         var events = [
             "changes",

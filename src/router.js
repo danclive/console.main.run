@@ -49,16 +49,25 @@ const router = new Router({
                     name: "article_index",
                     component: () => import("@/views/article/Index"),
                     meta: {
-                        title: "文章管理",
+                        title: "文章",
                         icon: "form"
                     }
                 }, {
                     path: "edit",
+                    name: "article_new",
+                    hidden: true,
+                    component: () => import("@/views/article/Edit"),
+                    meta: {
+                        title: "新建",
+                        icon: "form"
+                    }
+                }, {
+                    path: "edit/:id([a-z0-9]{24})",
                     name: "article_edit",
                     hidden: true,
                     component: () => import("@/views/article/Edit"),
                     meta: {
-                        title: "文章编辑",
+                        title: "编辑",
                         icon: "form"
                     }
                 }, {
@@ -66,7 +75,7 @@ const router = new Router({
                     name: "article_comment",
                     component: () => import("@/views/Home"),
                     meta: {
-                        title: "评论管理",
+                        title: "评论",
                         icon: "form"
                     }
                 }

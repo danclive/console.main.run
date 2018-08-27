@@ -4,22 +4,22 @@
             <div class="wrapper">
                 <div class="title">
                     <label>标题</label>
-                    <m-input size="big" special lable="标题"></m-input>
+                    <m-input size="big" special lable="标题" v-model="article.title"></m-input>
                 </div>
                 <div class="description">
                     <label>摘要</label>
-                    <m-textarea></m-textarea>
+                    <m-textarea v-model="article.summary"></m-textarea>
                 </div>
                 <label>正文</label>
                 <div class="editor" :class="isFocus ? 'focus': ''">
-                    <code-mirror v-model="content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
+                    <code-mirror v-model="article.content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
                 </div>
             </div>
         </div>
         <div class="section-function">
-            <m-button special>发布</m-button>
-            <m-button special>草稿</m-button>
-            <m-button special>预览</m-button>
+            <m-button class="fit" special @click="save" v-text="isUpdate ? '更新': '发布'"></m-button>
+            <!-- <m-button class="fit" special>草稿</m-button>
+            <m-button class="fit" special>预览</m-button> -->
         </div>
     </section>
 </template>
@@ -27,6 +27,7 @@
 <script>
 import CodeMirror from "@/components/article/CodeMirror";
 require("codemirror/keymap/sublime.js");
+import { detailArticle, newArticle, updateArticle } from "@/api/article.js";
 
 export default {
     name: "edit",
@@ -35,7 +36,6 @@ export default {
     },
     data() {
         return {
-            content: '',
             editorOption: {
                 tabSize: 4,
                 styleActiveLine: true,
@@ -47,7 +47,26 @@ export default {
                 keyMap: "sublime",
                 highlightFormatting: true
             },
-            isFocus: false
+            isFocus: false,
+            isUpdate: false,
+            article: {
+                id: "",
+                title: "",
+                image: [],
+                content: "",
+                summary: "",
+                collects: []
+            }
+        }
+    },
+    created() {
+        //console.log(this.$route.params.id)
+        const article_id = this.$route.params.id;
+
+        if (article_id) {
+            this.isUpdate = true;
+            this.article.id = article_id;
+            this.fetchData()
         }
     },
     methods: {
@@ -59,15 +78,26 @@ export default {
         },
         blur(editor) {
             this.isFocus = false;
+        },
+        fetchData() {
+            detailArticle(this.article.id).then(response => {
+                console.log(response)
+                this.article = response.data;
+            });
+        },
+        save() {
+            if (this.isUpdate) {
+                updateArticle(this.article.id, this.article).then(response => {
+                    console.log(response)
+                });
+            } else {
+                newArticle(this.article).then(response => {
+                    console.log(response.data.article_id);
+                    const article_id = response.data.article_id;
+                    this.$router.push({name: 'article_edit', params: {id: article_id}});
+                });
+            }
         }
-    },
-    watch: {
-        content(val, oldVal) {
-
-        }
-    },
-    mounted() {
-
     }
 };
 </script>

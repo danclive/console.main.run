@@ -198,13 +198,13 @@ export default {
     },
     watch: {
         options: {
-          deep: true,
-          handler(options, oldOptions) {
-              var key;
-              for (key in options) {
-                  this.editor.setOption(key, options[key]);
-              }
-          }
+            deep: true,
+            handler(options, oldOptions) {
+                var key;
+                for (key in options) {
+                    this.editor.setOption(key, options[key]);
+                }
+            }
         },
         code: function(newVal, oldVal) {
             const editor_value = this.editor.getValue();

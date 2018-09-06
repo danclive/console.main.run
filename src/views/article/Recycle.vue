@@ -1,8 +1,5 @@
 <template>
     <section class="section">
-        <div class="function">
-            <m-button @click="$router.push({name: 'article_new'})">新建</m-button>
-        </div>
         <div class="page">
             <span><m-button @click="prev_page" :disabled="!has_prev_page">上一页</m-button></span>
             <span>第{{listQuery.page}}页</span>
@@ -26,7 +23,7 @@
                     <div class="article-function">
                         <!-- <m-button size="small" special>预览</m-button> -->
                         <m-button size="small" special @click="$router.push({name: 'article_edit', params: {id: article.id}})">编辑</m-button>
-                        <m-button size="small" special @click="remove_item(article.id, index)">删除</m-button>
+                        <m-button size="small" special @click="restore_item(article.id, index)">还原</m-button>
                     </div>
                 </div>
             </article>
@@ -72,10 +69,10 @@ export default {
             this.listQuery.page -= 1;
             this.fecthDate();
         },
-        remove_item(id, index) {
-            deleteArticle(id).then(response => {
-                this.articles.splice(index, 1);
-            });
+        restore_item(id, index) {
+            // deleteArticle(id).then(response => {
+            //     this.articles.splice(index, 1);
+            // });
         }
     },
     computed: {

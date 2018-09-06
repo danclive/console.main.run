@@ -71,11 +71,11 @@ const router = new Router({
                         icon: "form"
                     }
                 }, {
-                    path: "comment",
-                    name: "article_comment",
-                    component: () => import("@/views/Home"),
+                    path: "recycle",
+                    name: "recycle",
+                    component: () => import("@/views/article/Recycle"),
                     meta: {
-                        title: "评论",
+                        title: "回收站",
                         icon: "form"
                     }
                 }

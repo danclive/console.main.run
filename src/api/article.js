@@ -33,7 +33,10 @@ export function updateArticle(id, data) {
 
 export function deleteArticle(id) {
     return request({
-        url: "/console/article" + id,
-        method: "delete"
+        url: "/console/article/" + id,
+        method: "patch",
+        data: {
+            status: 3
+        }
     });
 }

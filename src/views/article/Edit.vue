@@ -81,14 +81,14 @@ export default {
         },
         fetchData() {
             detailArticle(this.article.id).then(response => {
-                console.log(response)
+                // console.log(response)
                 this.article = response.data;
             });
         },
         save() {
             if (this.isUpdate) {
                 updateArticle(this.article.id, this.article).then(response => {
-                    console.log(response)
+                    // console.log(response)
                 });
             } else {
                 newArticle(this.article).then(response => {

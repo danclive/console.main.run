@@ -17,9 +17,10 @@
             </div>
         </div>
         <div class="section-function">
-            <m-button class="fit" special @click="save" v-text="isUpdate ? '更新': '发布'"></m-button>
-            <!-- <m-button class="fit" special>草稿</m-button>
-            <m-button class="fit" special>预览</m-button> -->
+            <m-button class="fit" special @click="button1click" v-show="button1">发布</m-button>
+            <m-button class="fit" special @click="button2click" v-show="button2">更新</m-button>
+            <m-button class="fit" special @click="button3click" v-show="button3">保存草稿</m-button>
+            <!-- <m-button class="fit" special>预览</m-button> -->
         </div>
     </section>
 </template>
@@ -55,19 +56,16 @@ export default {
                 image: [],
                 content: "",
                 summary: "",
-                collects: []
-            }
+                collects: [],
+                status: 0
+            },
+            button1: false,
+            button2: false,
+            button3: false
         }
     },
     created() {
-        //console.log(this.$route.params.id)
-        const article_id = this.$route.params.id;
-
-        if (article_id) {
-            this.isUpdate = true;
-            this.article.id = article_id;
-            this.fetchData()
-        }
+        this.create();
     },
     methods: {
         refresh(editor) {
@@ -79,24 +77,74 @@ export default {
         blur(editor) {
             this.isFocus = false;
         },
+        create() {
+            const article_id = this.$route.params.id;
+
+            if (article_id) {
+                this.isUpdate = true;
+                this.article.id = article_id;
+                this.fetchData()
+            } else {
+                this.isUpdate = false;
+                this.button1 = true;
+            }
+        },
         fetchData() {
             detailArticle(this.article.id).then(response => {
-                // console.log(response)
                 this.article = response.data;
+
+                this.button1 = false;
+                this.button3 = false;
+
+                if (this.article.status == 0) {
+                    this.button2 = true;
+                } else if (this.article.status == 2) {
+                    this.button1 = true;
+                    this.button3 = true;
+                }
             });
         },
-        save() {
-            if (this.isUpdate) {
+        button1click() {
+            this.article.status = 0;
+
+            if (this.article.id) {
                 updateArticle(this.article.id, this.article).then(response => {
-                    // console.log(response)
+                    console.log(response)
+                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             } else {
                 newArticle(this.article).then(response => {
-                    console.log(response.data.article_id);
-                    const article_id = response.data.article_id;
-                    this.$router.push({name: 'article_edit', params: {id: article_id}});
+                    console.log(response)
+                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             }
+
+            this.create();
+        },
+        button2click() {
+            updateArticle(this.article.id, this.article).then(response => {
+                console.log(response)
+                this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+            });
+
+            this.create();
+        },
+        button3click() {
+            if (this.article.id) {
+                updateArticle(this.article.id, this.article).then(response => {
+                    console.log(response)
+                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                });
+            } else {
+                this.article.status = 2;
+
+                newArticle(this.article).then(response => {
+                    console.log(response)
+                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                });
+            }
+
+            this.create();
         }
     }
 };

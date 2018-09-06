@@ -40,3 +40,13 @@ export function deleteArticle(id) {
         }
     });
 }
+
+export function restoreArticle(id) {
+    return request({
+        url: "/console/article/" + id,
+        method: "patch",
+        data: {
+            status: 2
+        }
+    });
+}

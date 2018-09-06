@@ -73,6 +73,7 @@ const router = new Router({
                 }, {
                     path: "recycle",
                     name: "recycle",
+                    hidden: true,
                     component: () => import("@/views/article/Recycle"),
                     meta: {
                         title: "回收站",

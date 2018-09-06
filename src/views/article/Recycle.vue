@@ -37,14 +37,15 @@
 </template>
 
 <script>
-import { listArticle, deleteArticle } from "@/api/article.js";
+import { listArticle, restoreArticle } from "@/api/article.js";
 export default {
     name: "article_index",
     data() {
         return {
             listQuery: {
                 page: 1,
-                per_page: 10
+                per_page: 10,
+                status: 3
             },
             articles: [],
             count: 0
@@ -70,9 +71,9 @@ export default {
             this.fecthDate();
         },
         restore_item(id, index) {
-            // deleteArticle(id).then(response => {
-            //     this.articles.splice(index, 1);
-            // });
+            restoreArticle(id).then(response => {
+                this.articles.splice(index, 1);
+            });
         }
     },
     computed: {
@@ -91,7 +92,6 @@ export default {
             }
         }
     }
-    //Y3Vyc29yOnYyOpK5MjAxOC0wNC0wOFQxNjoyODozOCswODowMM4HMb0b
 };
 </script>
 

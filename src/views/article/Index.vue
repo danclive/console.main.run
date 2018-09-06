@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="function">
-            <m-button @click="$router.push({name: 'article_new'})">新建</m-button>
+            <m-button @click="$router.push({name: 'article_new'})">新建</m-button><m-button @click="$router.push({name: 'recycle'})">回收站</m-button>
         </div>
         <div class="page">
             <span><m-button @click="prev_page" :disabled="!has_prev_page">上一页</m-button></span>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="article-content">
                     <div class="article-title">
-                        {{article.title}}
+                        {{article.title}}<span v-if="article.status==2"> [草稿]</span>
                     </div>
                     <div class="article-info">
                         <span>{{article.create_at}}</span>
@@ -94,7 +94,6 @@ export default {
             }
         }
     }
-    //Y3Vyc29yOnYyOpK5MjAxOC0wNC0wOFQxNjoyODozOCswODowMM4HMb0b
 };
 </script>
 
@@ -104,6 +103,9 @@ export default {
     
     .function {
         //margin-bottom: 10px;
+        button {
+            margin-right: 10px;
+        }
     }
     
     .page {
@@ -149,7 +151,9 @@ export default {
                 //background-color: #ff6600;
                 
                 .article-title {
-
+                    span {
+                        color: #999999;
+                    }
                 }
                 
                 // .article-description {

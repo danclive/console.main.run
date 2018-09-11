@@ -7,9 +7,9 @@
         </div>
         <div class="articles">
             <article class="article" v-for="(article, index) in articles" :key="article.id">
-                <div class="article-img">
+                <!-- <div class="article-img">
                     <img src="https://cdn1.01io.com/temp/1.png">
-                </div>
+                </div> -->
                 <div class="article-content">
                     <div class="article-title">
                         {{article.title}}

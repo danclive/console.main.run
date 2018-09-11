@@ -79,6 +79,22 @@ const router = new Router({
                         title: "回收站",
                         icon: "form"
                     }
+                }, {
+                    path: "collect",
+                    name: "collect",
+                    component: () => import("@/views/article/Collect"),
+                    meta: {
+                        title: "专题",
+                        icon: "form"
+                    }
+                }, {
+                    path: "gallery",
+                    name: "gallery",
+                    component: () => import("@/views/article/Gallery"),
+                    meta: {
+                        title: "图库",
+                        icon: "form"
+                    }
                 }
             ]
         }, {

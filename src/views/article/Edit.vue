@@ -87,6 +87,7 @@ export default {
             } else {
                 this.isUpdate = false;
                 this.button1 = true;
+                this.button3 = true;
             }
         },
         fetchData() {
@@ -161,10 +162,8 @@ export default {
         .wrapper {
             margin: 0 auto;
             width: 760px;
-            //height: 800px;
 
             .editor {
-                //box-shadow: inset 0 0 0 1px #F5F5F5;
                 box-shadow: inset 0 0 0 1px rgba(252, 173, 38, .5);
                 transition: box-shadow 0.15s ease-in-out;
                 padding: 10px;

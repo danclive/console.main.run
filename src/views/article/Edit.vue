@@ -28,6 +28,7 @@
 <script>
 import CodeMirror from "@/components/article/CodeMirror";
 require("codemirror/keymap/sublime.js");
+require("codemirror/addon/scroll/simplescrollbars.js")
 import { detailArticle, newArticle, updateArticle } from "@/api/article.js";
 
 export default {
@@ -46,7 +47,9 @@ export default {
                 theme: "paraiso-light2",
                 lineWrapping: true,
                 keyMap: "sublime",
-                highlightFormatting: true
+                highlightFormatting: true,
+                scrollbarStyle: "simple",
+                inputStyle: "contenteditable"
             },
             isFocus: false,
             isUpdate: false,
@@ -223,5 +226,73 @@ export default {
 
 .cm-s-paraiso-light2 .CodeMirror-activeline-background { background: #CFD1C4; }
 .cm-s-paraiso-light2 .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+
+.CodeMirror-simplescroll-horizontal div, .CodeMirror-simplescroll-vertical div {
+  position: absolute;
+  background: #ccc;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+}
+
+.CodeMirror-simplescroll-horizontal, .CodeMirror-simplescroll-vertical {
+  position: absolute;
+  z-index: 6;
+  background: #eee;
+}
+
+.CodeMirror-simplescroll-horizontal {
+  bottom: 0; left: 0;
+  height: 8px;
+}
+.CodeMirror-simplescroll-horizontal div {
+  bottom: 0;
+  height: 100%;
+}
+
+.CodeMirror-simplescroll-vertical {
+  right: 0; top: 0;
+  width: 8px;
+}
+.CodeMirror-simplescroll-vertical div {
+  right: 0;
+  width: 100%;
+}
+
+
+.CodeMirror-overlayscroll .CodeMirror-scrollbar-filler, .CodeMirror-overlayscroll .CodeMirror-gutter-filler {
+  display: none;
+}
+
+.CodeMirror-overlayscroll-horizontal div, .CodeMirror-overlayscroll-vertical div {
+  position: absolute;
+  background: #bcd;
+  border-radius: 3px;
+}
+
+.CodeMirror-overlayscroll-horizontal, .CodeMirror-overlayscroll-vertical {
+  position: absolute;
+  z-index: 6;
+}
+
+.CodeMirror-overlayscroll-horizontal {
+  bottom: 0; left: 0;
+  height: 6px;
+}
+.CodeMirror-overlayscroll-horizontal div {
+  bottom: 0;
+  height: 100%;
+}
+
+.CodeMirror-overlayscroll-vertical {
+  right: 0; top: 0;
+  width: 6px;
+}
+.CodeMirror-overlayscroll-vertical div {
+  right: 0;
+  width: 100%;
+}
 
 </style>

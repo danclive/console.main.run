@@ -113,42 +113,42 @@ export default {
 
             if (this.article.id) {
                 updateArticle(this.article.id, this.article).then(response => {
-                    console.log(response)
-                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                    //console.log(response)
+                    //this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             } else {
                 newArticle(this.article).then(response => {
-                    console.log(response)
+                    //console.log(response)
                     this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             }
 
-            this.create();
+            //this.create();
         },
         button2click() {
             updateArticle(this.article.id, this.article).then(response => {
-                console.log(response)
-                this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                //console.log(response)
+                //this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
             });
 
-            this.create();
+            //this.create();
         },
         button3click() {
             if (this.article.id) {
                 updateArticle(this.article.id, this.article).then(response => {
-                    console.log(response)
-                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                    //console.log(response)
+                    //this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             } else {
                 this.article.status = 2;
 
                 newArticle(this.article).then(response => {
-                    console.log(response)
+                    //console.log(response)
                     this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             }
 
-            this.create();
+            //this.create();
         }
     }
 };

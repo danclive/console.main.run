@@ -38,6 +38,7 @@ export default {
         
         .container {
             flex: 1 0 auto;
+            width: 0;
             padding: 10px;
         }
     }

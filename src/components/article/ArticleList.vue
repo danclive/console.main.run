@@ -1,5 +1,5 @@
 <template>
-    <div class="articles">
+    <!-- <div class="articles">
         <article class="article" v-for="(article, index) in articles" :key="article.id">
             <div class="article-img" v-if="article.image.length > 0">
                 <img :src="article.image[0]">
@@ -10,8 +10,8 @@
                 </div>
                 <div class="article-info">
                     <span>{{article.create_at}}</span>
-                    <!-- <span>文集: XXX</span>
-                    <span>浏览: XXX</span> -->
+                    <span>文集: XXX</span>
+                    <span>浏览: XXX</span>
                 </div>
                 <div class="article-function">
                     <m-button size="small" special v-if="preview" @click="click_preview(article.id)">预览</m-button>
@@ -21,6 +21,29 @@
                 </div>
             </div>
         </article>
+    </div> -->
+    <div class="list-style-sep Grid">
+        <div class="item Cell -c2of10" v-for="(article, index) in articles" :key="article.id">
+            <div class="box">
+                <div class="img" v-if="article.image.length > 0">
+                    <img :src="article.image[0]">
+                </div>
+                <div class="content">
+                    <div class="title">
+                        {{article.title}}<span v-if="article.status==2"> [草稿]</span>
+                    </div>
+                    <div class="info">
+                        <span>{{article.create_at}}</span>
+                    </div>
+                    <div class="function">
+                        <m-button size="small" special v-if="preview" @click="click_preview(article.id)">预览</m-button>
+                        <m-button size="small" special v-if="edit" @click="click_edit(article.id)">编辑</m-button>
+                        <m-button size="small" special v-if="remove" @click="click_remove(article.id, index)">删除</m-button>
+                        <m-button size="small" special v-if="restore" @click="click_restore(article.id, index)">还原</m-button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -29,7 +52,9 @@ export default {
     props: {
         articles: {
             type: Array,
-            default: []
+            default: function() {
+                return [];
+            }
         },
         preview: Boolean,
         edit: Boolean,
@@ -53,6 +78,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+/*
 .articles {
     .article {
         height: 100px;
@@ -112,4 +138,5 @@ export default {
         }
     }
 }
+*/
 </style>

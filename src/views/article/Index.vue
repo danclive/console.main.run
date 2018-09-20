@@ -39,7 +39,7 @@ export default {
         return {
             listQuery: {
                 page: 1,
-                per_page: 10
+                per_page: 20
             },
             articles: [],
             count: 0
@@ -101,10 +101,6 @@ export default {
         button {
             margin-right: 10px;
         }
-    }
-    
-    .page {
-        margin-top: 10px;
     }
 }
 </style>

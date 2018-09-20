@@ -36,7 +36,7 @@ export default {
         return {
             listQuery: {
                 page: 1,
-                per_page: 10,
+                per_page: 20,
                 status: 3
             },
             articles: [],
@@ -100,11 +100,6 @@ export default {
     
     .function {
         //margin-bottom: 10px;
-    }
-    
-    .page {
-        margin-top: 10px;
-    }
-    
+    }  
 }
 </style>

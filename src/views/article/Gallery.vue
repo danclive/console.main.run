@@ -31,6 +31,13 @@
                 </div>
             </div>
         </div>
+        <pagination
+            :page="listQuery.page"
+            :has_prev_page="has_prev_page"
+            :has_next_page="has_next_page"
+            @prev="prev_page"
+            @next="next_page"
+        ></pagination>
     </section>
 </template>
 

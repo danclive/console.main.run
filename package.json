@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "codemirror": "^5.39.2",
+    "gaugeJS": "^1.3.6",
     "highlight.js": "https://github.com/mitum/highlight.js.git",
     "markdown-it": "^8.4.2",
     "store": "^2.0.12",

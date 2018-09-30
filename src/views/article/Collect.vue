@@ -8,7 +8,7 @@
             @next="next_page"
         ></pagination>
         <div class="list-style-sep Grid">
-            <div class="item Cell -c2of10" v-for="(collect, index) in collects" :key="collect.id">
+            <div class="item Cell -mb-c2of10" v-for="(collect, index) in collects" :key="collect.id">
                 <div class="box">
                     <div class="img" v-if="collect.image.length > 0">
                         <img :src="collect.image[0]">

@@ -1,7 +1,15 @@
 <template>
     <section class="section">
         <div class="function">
-            <m-button>上传</m-button>
+            <!-- <m-button>上传</m-button> -->
+            <vue-core-image-upload
+                :class="['m-button-default']"
+                :crop="false"
+                @imageuploaded="imageuploaded"
+                :max-file-size="5242880"
+                text="上传"
+                :url="upload_url">
+            </vue-core-image-upload>
         </div>
         <pagination
             :page="listQuery.page"
@@ -11,7 +19,7 @@
             @next="next_page"
         ></pagination>
         <div class="list-style-sep Grid">
-            <div class="item Cell -c2of10" v-for="(media, index) in medias" :key="media.id">
+            <div class="item Cell -mb-c2of10" v-for="(media, index) in medias" :key="media.id">
                 <div class="box">
                     <div class="img">
                         <img :src="media.url + '?imageView2/1/w/600/h/256/q/75'">
@@ -42,12 +50,15 @@
 </template>
 
 <script>
-import Pagination from "@/components/common/Pagination"
-import { listMedia, detailMedia } from "@/api/media"
+import Pagination from "@/components/common/Pagination";
+import VueCoreImageUpload  from "vue-core-image-upload";
+import { listMedia, detailMedia } from "@/api/media";
+import { API_BASE_URL } from "@/config.js";
 export default {
     name: "gallery",
     components: {
-        Pagination
+        Pagination,
+        VueCoreImageUpload
     },
     data() {
         return {
@@ -65,7 +76,8 @@ export default {
                 width: 0,
                 height: 0,
                 url: ""
-            }
+            },
+            upload_url: API_BASE_URL+'/console/console/media'
         }
     },
     created() {
@@ -103,6 +115,12 @@ export default {
             this.activeIndex = index;
 
             this.fetchDetail(id);
+        },
+        imageuploaded(res) {
+            // if (res.errcode == 0) {
+            //   this.src = 'http://img1.vued.vanthink.cn/vued751d13a9cb5376b89cb6719e86f591f3.png';
+            // }
+            console.log(res)
         }
     },
     computed: {

@@ -6,8 +6,8 @@
                 :class="['m-button-default']"
                 :crop="false"
                 @imageuploaded="imageuploaded"
-                :max-file-size="5242880"
                 text="上传"
+                :headers="headers"
                 :url="upload_url">
             </vue-core-image-upload>
         </div>
@@ -54,6 +54,7 @@ import Pagination from "@/components/common/Pagination";
 import VueCoreImageUpload  from "vue-core-image-upload";
 import { listMedia, detailMedia } from "@/api/media";
 import { API_BASE_URL } from "@/config.js";
+import LocalStore from "store";
 export default {
     name: "gallery",
     components: {
@@ -77,7 +78,11 @@ export default {
                 height: 0,
                 url: ""
             },
-            upload_url: API_BASE_URL+'/console/console/media'
+            headers: {
+                token: LocalStore.get("token")
+            },
+            //upload_url: API_BASE_URL + '/console/media'
+            upload_url: 'http://127.0.0.1:10001/console/media'
         }
     },
     created() {
@@ -121,6 +126,10 @@ export default {
             //   this.src = 'http://img1.vued.vanthink.cn/vued751d13a9cb5376b89cb6719e86f591f3.png';
             // }
             console.log(res)
+            if (res.success) {
+                this.page = 1;
+                this.fecthDate()
+            }
         }
     },
     computed: {

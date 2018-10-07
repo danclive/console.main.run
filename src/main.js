@@ -10,7 +10,7 @@ import "../../web.main.run/src/ui/style/style.styl"
 Vue.config.productionTip = false;
 
 var app = new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");

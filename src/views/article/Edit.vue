@@ -10,14 +10,14 @@
         </div>
         <div class="box">
             <div class="title">
-                <input type="text" v-model="article.title" class="m-input-defalut" placeholder="标题">
+                <m-input type="text" v-model="article.title" placeholder="标题"></m-input>
             </div>
             <div class="description">
-                <textarea class="m-textarea" v-model="article.summary" placeholder="摘要"></textarea>
+                <m-textarea :rows="5" class="m-textarea" v-model="article.summary" placeholder="摘要"></m-textarea>
             </div>
         </div>
         <div class="box">
-            <div class="thumb">
+            <!-- <div class="thumb">
                 <div class="form">
                     <div class="field half first">
                         <label>封面图1</label>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="box">
             <div class="editor">
@@ -127,7 +127,7 @@ export default {
 
         document.onkeydown=function (e) { 
             e=window.event||e;
-            var key=event.keyCode;
+            var key=e.keyCode;
             if(key== 83 && e.ctrlKey){
                 /*延迟，兼容FF浏览器  */
                 setTimeout(function(){
@@ -253,6 +253,21 @@ export default {
         colsePreview() {
             this.canPreview = false;
         }
+    },
+    watch: {
+        "$route" (val, old) {
+            const article_id = this.$route.params.id;
+
+            if (article_id) {
+                this.isUpdate = true;
+                this.article.id = article_id;
+                this.fetchData()
+            } else {
+                this.isUpdate = false;
+                this.button1 = true;
+                this.button3 = true;
+            }
+        }
     }
 };
 </script>
@@ -262,13 +277,6 @@ export default {
     height: 100%;
     
     .box {
-        
-        .description {
-            textarea {
-                box-shadow: none;
-                border-bottom: 1px solid #F5F5F5;
-            }
-        }
         
         .function {
             border-bottom: 1px solid #F5F5F5;
@@ -286,6 +294,13 @@ export default {
             }
         }
         
+        .description {
+            textarea {
+                box-shadow: none;
+                border-bottom: 1px solid #F5F5F5;
+            }
+        }
+        
         .thumb {
             border-bottom: 1px solid #F5F5F5;
             
@@ -298,7 +313,7 @@ export default {
         }
         
         .editor {
-            font-size: 2rem;
+            font-size: 1.6rem;
         }
     }
     

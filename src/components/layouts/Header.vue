@@ -4,11 +4,12 @@
             MAIN.RUN
         </div>
         <div class="setting">
-            <m-button>注销</m-button>
+            <m-button @click="logout">注销</m-button>
         </div>
     </header>
 </template>
 <script>
+import LocalStore from "store";
 export default {
     mounted() {
         this.fetchData();
@@ -16,6 +17,10 @@ export default {
     methods: {
         fetchData() {
             //console.log(this.$store.state.user.id)
+        },
+        logout() {
+            LocalStore.remove("token");
+            this.$router.push({name: "login"});
         }
     }
 }

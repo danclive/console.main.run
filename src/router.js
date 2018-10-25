@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Main from "@/components/layouts/Main";
+import Main from "@/components/layouts/Main.vue";
 import LocalStore from "store";
 
 Vue.use(Router);
@@ -109,7 +109,7 @@ const router = new Router({
                 {
                     path: "/",
                     name: "statistics_index",
-                    component: () => import("@/views/Home"),
+                    component: () => import("@/views/Home.vue"),
                     meta: {
                         title: "用户留存",
                         icon: "form"
@@ -117,7 +117,7 @@ const router = new Router({
                 }, {
                     path: "index2",
                     name: "statistics_index2",
-                    component: () => import("@/views/Home"),
+                    component: () => import("@/views/Home.vue"),
                     meta: {
                         title: "流失用户",
                         icon: "form"
@@ -127,7 +127,7 @@ const router = new Router({
         }, {
             path: "/login",
             name: "login",
-            component: () => import("@/views/Login")
+            component: () => import("@/views/Login.vue")
         }, {
             path: "*",
             name: "404",

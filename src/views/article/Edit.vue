@@ -5,7 +5,6 @@
                 <m-button class="" special size="small" @click="button1click" v-show="button1">发布</m-button>
                 <m-button class="" special size="small" @click="button2click" v-show="button2">更新</m-button>
                 <m-button class="" special size="small" @click="button3click" v-show="button3">保存草稿</m-button>
-                <m-button class="" special size="small" @click="openPreview">预览</m-button>
             </div>
         </div>
         <div class="box">
@@ -37,7 +36,7 @@
                 </div>
             </div> -->
         </div>
-        <div class="box">
+        <!-- <div class="box">
             <div class="editor">
                 <code-mirror v-model="article.content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
             </div>
@@ -48,29 +47,15 @@
                 <div class="title"><h1>{{article.title}}</h1></div>
                 <div class="content" v-html="renderHtml"></div>
             </div>
-        </div>
-        <!-- <div class="section-content">
-            <div class="wrapper">
-                <div class="title">
-                    <label>标题</label>
-                    <m-input size="big" special lable="标题" v-model="article.title"></m-input>
-                </div>
-                <div class="description">
-                    <label>摘要</label>
-                    <m-textarea v-model="article.summary"></m-textarea>
-                </div>
-                <label>正文</label>
-                <div class="editor" :class="isFocus ? 'focus': ''">
-                    <code-mirror v-model="article.content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
-                </div>
+        </div> -->
+        <div class="box Grid">
+            <div class="editor Cell -mb-c5of10">
+                <code-mirror v-model="article.content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
+            </div>
+            <div class="preview Cell -mb-c5of10">
+                <div class="content" v-html="renderHtml"></div>
             </div>
         </div>
-        <div class="section-function">
-            <m-button class="fit" special @click="button1click" v-show="button1">发布</m-button>
-            <m-button class="fit" special @click="button2click" v-show="button2">更新</m-button>
-            <m-button class="fit" special @click="button3click" v-show="button3">保存草稿</m-button>
-            <m-button class="fit" special>预览</m-button>
-        </div> -->
     </section>
 </template>
 
@@ -92,7 +77,7 @@ export default {
             editorOption: {
                 tabSize: 4,
                 styleActiveLine: true,
-                lineNumbers: true,
+                lineNumbers: false,
                 line: true,
                 mode: "gfm",
                 theme: "paraiso-light2",
@@ -113,6 +98,7 @@ export default {
                 collects: [],
                 status: 0
             },
+            md: null,
             button1: false,
             button2: false,
             button3: false,
@@ -122,6 +108,40 @@ export default {
     },
     created() {
         this.create();
+
+        this.md = new MarkdownIt({
+            html: true,
+            typographer:  true,
+            highlight: function(str, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return (
+                            '<pre class="hljs"><code>' +
+                            hljs.highlight(lang, str, true).value +
+                            "</code></pre>"
+                        );
+                    } catch (__) {}
+                }
+
+                // return (
+                //   '<pre class="hljs"><code>' +
+                //   md.utils.escapeHtml(str) +
+                //   "</code></pre>"
+                // );
+                //return hljs.highlightAuto(str).value;
+                return (
+                    '<pre class="hljs"><code>' +
+                    hljs.highlightAuto(str).value +
+                    "</code></pre>"
+                );
+            }
+        }).use(require("markdown-it-footnote"))
+            .use(require("markdown-it-container"), "name")
+            .use(require("markdown-it-ins"))
+            .use(require("markdown-it-mark"))
+            .use(require("markdown-it-checkbox"))
+            .use(require("markdown-it-attrs"))
+            .use(require("markdown-it-multimd-table"), {enableMultilineRows: true});
     },
     mounted() {
 
@@ -218,46 +238,8 @@ export default {
 
             //this.create();
         },
-        openPreview() {
-            const md = new MarkdownIt({
-                html: true,
-                typographer:  true,
-                highlight: function(str, lang) {
-                    if (lang && hljs.getLanguage(lang)) {
-                        try {
-                            return (
-                                '<pre class="hljs"><code>' +
-                                hljs.highlight(lang, str, true).value +
-                                "</code></pre>"
-                            );
-                        } catch (__) {}
-                    }
-
-                    // return (
-                    //   '<pre class="hljs"><code>' +
-                    //   md.utils.escapeHtml(str) +
-                    //   "</code></pre>"
-                    // );
-                    //return hljs.highlightAuto(str).value;
-                    return (
-                        '<pre class="hljs"><code>' +
-                        hljs.highlightAuto(str).value +
-                        "</code></pre>"
-                    );
-                }
-            }).use(require("markdown-it-footnote"))
-                .use(require("markdown-it-container"), "name")
-                .use(require("markdown-it-ins"))
-                .use(require("markdown-it-mark"))
-                .use(require("markdown-it-checkbox"))
-                .use(require("markdown-it-attrs"))
-                .use(require("markdown-it-multimd-table"), {enableMultilineRows: true});
-
-            this.renderHtml = md.render(this.article.content);
-            this.canPreview = true;
-        },
-        colsePreview() {
-            this.canPreview = false;
+        render() {
+            this.renderHtml = this.md.render(this.article.content);
         }
     },
     watch: {
@@ -273,6 +255,9 @@ export default {
                 this.button1 = true;
                 this.button3 = true;
             }
+        },
+        "article.content" (val, old) {
+            setTimeout(this.render, 100);
         }
     }
 };
@@ -320,9 +305,20 @@ export default {
         
         .editor {
             font-size: 1.6rem;
+            padding: 10px;
+        }
+        
+        .preview {
+            padding: 10px;
+            border-left: 1px solid #F5F5F5;
+            
+            .content {
+
+            }
         }
     }
     
+/*    
     .preview {
         position: fixed;
         background-color: rgba(0, 0, 0, 0.4);
@@ -357,7 +353,7 @@ export default {
             }
         }
     }
-
+*/
     //display: flex;
     
     // .section-content {
@@ -390,7 +386,8 @@ export default {
 <style>
 .cm-s-paraiso-light2.CodeMirror { 
     //background: #e7e9db; 
-    color: #41323f;
+    //color: #41323f;
+    color: #424242;
     //height: 760px;
 }
 .cm-s-paraiso-light2 div.CodeMirror-selected {
@@ -410,7 +407,7 @@ export default {
 }
 .cm-s-paraiso-light2 .CodeMirror-cursor { border-left: 1px solid #776e71; }
 
-.cm-s-paraiso-light2 span.cm-comment { color: #e96ba8; }
+.cm-s-paraiso-light2 span.cm-comment { color: #657b83; }
 .cm-s-paraiso-light2 span.cm-atom { color: #815ba4; }
 .cm-s-paraiso-light2 span.cm-number { color: #815ba4; }
 
@@ -461,5 +458,18 @@ export default {
 .CodeMirror-simplescroll-vertical div {
   right: 0;
   width: 100%;
+}
+
+.cm-s-paraiso-light2 span.cm-header-1 {
+    font-size: 2.8rem;
+}
+.cm-s-paraiso-light2 span.cm-header-2 {
+    font-size: 2.4rem;
+}
+.cm-s-paraiso-light2 span.cm-header-3 {
+    font-size: 2rem;
+}
+.cm-s-paraiso-light2 span.cm-header-4 {
+    font-size: 1.6rem;
 }
 </style>

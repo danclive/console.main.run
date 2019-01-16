@@ -12,8 +12,10 @@
         ></pagination>
         <article-list
             :articles="articles"
-            edit @edit="edit"
-            remove @remove="remove"
+            edit
+            @edit="edit"
+            remove
+            @remove="remove"
         ></article-list>
         <pagination
             :page="listQuery.page"
@@ -24,13 +26,12 @@
         ></pagination>
     </section>
 </template>
-
 <script>
-import Pagination from "@/components/common/Pagination"
-import ArticleList from "@/components/article/ArticleList"
+import Pagination from "@/components/common/Pagination";
+import ArticleList from "@/components/article/ArticleList";
 import { listArticle, deleteArticle } from "@/api/article.js";
 export default {
-    name: "article_index",
+    name: "ArticleIndex",
     components: {
         Pagination,
         ArticleList
@@ -43,7 +44,7 @@ export default {
             },
             articles: [],
             count: 0
-        }
+        };
     },
     created() {
         this.fecthDate();
@@ -51,7 +52,7 @@ export default {
     methods: {
         fecthDate() {
             listArticle(this.listQuery).then(response => {
-                //console.log(response)
+                // console.log(response)
                 this.articles = response.data.articles;
                 this.count = response.data.count;
             });
@@ -65,7 +66,7 @@ export default {
             this.fecthDate();
         },
         edit(id) {
-            this.$router.push({name: "article_edit", params: {id: id}})
+            this.$router.push({ name: "article_edit", params: { id: id }});
         },
         remove(params) {
             deleteArticle(params.id).then(response => {
@@ -95,7 +96,7 @@ export default {
 <style lang="stylus" scoped>
 .section {
     height: 100%;
-    
+
     .function {
         //margin-bottom: 10px;
         button {

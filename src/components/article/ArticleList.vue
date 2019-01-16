@@ -69,13 +69,13 @@ export default {
             this.$emit("edit", id);
         },
         click_remove(id, index) {
-            this.$emit("remove", {id: id, index: index})
+            this.$emit("remove", { id: id, index: index });
         },
-        click_restore(id ,index) {
-            this.$emit("restore", {id: id, index: index})
+        click_restore(id, index) {
+            this.$emit("restore", { id: id, index: index });
         }
     }
-}
+};
 </script>
 <style lang="stylus" scoped>
 /*
@@ -91,22 +91,22 @@ export default {
 
         &:hover {
             box-shadow: inset 0 0 0 1px #f29e0d;
-                
+
             .article-function {
                 opacity: 1 !important;
             }
         }
-            
+
         .article-img {
             width: 168px;
             flex: 0 0 auto;
-                
+
             img {
                 height: 100%;
                 width: 100%;
             }
         }
-            
+
         .article-content {
             flex: 1 0 auto;
             padding-left: 10px;
@@ -116,21 +116,21 @@ export default {
                     color: #999999;
                 }
             }
-                
+
             .article-info {
                 font-size: 1.4rem;
                 color: #999999;
                 padding: 4px 0 4px 0;
-                    
+
                 span {
                     margin-right: 10px;
                 }
             }
-                
+
             .article-function {
                 opacity: 0.5;
                 transition: opacity 0.3s ease-in-out;
-                    
+
                 button {
                     margin-right: 4px;
                 }

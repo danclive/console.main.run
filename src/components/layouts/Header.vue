@@ -16,14 +16,14 @@ export default {
     },
     methods: {
         fetchData() {
-            //console.log(this.$store.state.user.id)
+            // console.log(this.$store.state.user.id)
         },
         logout() {
             LocalStore.remove("token");
-            this.$router.push({name: "login"});
+            this.$router.push({ name: "login" });
         }
     }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -32,7 +32,7 @@ export default {
     height: 65px;
     border-bottom: 1px solid #F5F5F5;
     display: flex;
-    
+
     .logo {
         flex: 0 0 auto;
         width: 256px;

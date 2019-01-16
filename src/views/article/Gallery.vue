@@ -19,7 +19,7 @@
             @next="next_page"
         ></pagination>
         <div class="list-style-sep Grid">
-            <div class="item Cell -mb-c2of10" v-for="(media, index) in medias" :key="media.id">
+            <div class="item Cell -mb-c2of10" v-for="media in medias" :key="media.id">
                 <div class="box">
                     <div class="img">
                         <img :src="media.url + '?imageView2/1/w/600/h/256/q/75'">
@@ -51,12 +51,12 @@
 
 <script>
 import Pagination from "@/components/common/Pagination";
-import VueCoreImageUpload  from "vue-core-image-upload";
+import VueCoreImageUpload from "vue-core-image-upload";
 import { listMedia, detailMedia } from "@/api/media";
 import { API_BASE_URL } from "@/config.js";
 import LocalStore from "store";
 export default {
-    name: "gallery",
+    name: "Gallery",
     components: {
         Pagination,
         VueCoreImageUpload
@@ -81,9 +81,8 @@ export default {
             headers: {
                 token: LocalStore.get("token")
             },
-            //upload_url: API_BASE_URL + '/console/media'
-            upload_url: 'http://127.0.0.1:10001/console/media'
-        }
+            upload_url: API_BASE_URL + "/console/media"
+        };
     },
     created() {
         this.fecthDate();
@@ -116,7 +115,7 @@ export default {
             const item = this.medias[index];
             item.active = true;
             this.$set(this.medias, index, item);
-    
+
             this.activeIndex = index;
 
             this.fetchDetail(id);
@@ -125,10 +124,10 @@ export default {
             // if (res.errcode == 0) {
             //   this.src = 'http://img1.vued.vanthink.cn/vued751d13a9cb5376b89cb6719e86f591f3.png';
             // }
-            console.log(res)
+            console.log(res);
             if (res.success) {
                 this.page = 1;
-                this.fecthDate()
+                this.fecthDate();
             }
         }
     },

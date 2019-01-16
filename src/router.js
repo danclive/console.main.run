@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+// import Home from "./views/Home.vue";
 import Main from "@/components/layouts/Main.vue";
 import LocalStore from "store";
 
@@ -18,11 +18,11 @@ const router = new Router({
     routes: [
         {
             path: "/",
-            //name: "home",
+            // name: "home",
             component: Main,
             meta: {
                 title: "控制台",
-                icon: "form"
+                icon: "仪表盘"
             },
             children: [
                 {
@@ -35,13 +35,14 @@ const router = new Router({
                     }
                 }
             ]
-        }, {
+        },
+        {
             path: "/article",
-            //name: "article",
+            // name: "article",
             component: Main,
             meta: {
                 title: "内容管理",
-                icon: "form"
+                icon: "icon_网页"
             },
             children: [
                 {
@@ -49,8 +50,8 @@ const router = new Router({
                     name: "article_index",
                     component: () => import("@/views/article/Index"),
                     meta: {
-                        title: "文章",
-                        icon: "form"
+                        title: "文章"
+                        // icon: "form"
                     }
                 }, {
                     path: "edit",
@@ -58,8 +59,8 @@ const router = new Router({
                     hidden: true,
                     component: () => import("@/views/article/Edit"),
                     meta: {
-                        title: "新建",
-                        icon: "form"
+                        title: "新建"
+                        // icon: "form"
                     }
                 }, {
                     path: "edit/:id([a-z0-9]{24})",
@@ -67,8 +68,8 @@ const router = new Router({
                     hidden: true,
                     component: () => import("@/views/article/Edit"),
                     meta: {
-                        title: "编辑",
-                        icon: "form"
+                        title: "编辑"
+                        // icon: "form"
                     }
                 }, {
                     path: "recycle",
@@ -76,59 +77,62 @@ const router = new Router({
                     hidden: true,
                     component: () => import("@/views/article/Recycle"),
                     meta: {
-                        title: "回收站",
-                        icon: "form"
+                        title: "回收站"
+                        // icon: "form"
                     }
                 }, {
                     path: "collect",
                     name: "collect",
                     component: () => import("@/views/article/Collect"),
                     meta: {
-                        title: "专题",
-                        icon: "form"
+                        title: "专题"
+                        // icon: "form"
                     }
                 }, {
                     path: "gallery",
                     name: "gallery",
                     component: () => import("@/views/article/Gallery"),
                     meta: {
-                        title: "图库",
-                        icon: "form"
+                        title: "图库"
+                        // icon: "form"
                     }
                 }
             ]
-        }, {
-            path: "/statistics",
-            //name: "statistics",
-            component: Main,
-            meta: {
-                title: "统计分析",
-                icon: ""
-            },
-            children: [
-                {
-                    path: "/",
-                    name: "statistics_index",
-                    component: () => import("@/views/Home.vue"),
-                    meta: {
-                        title: "用户留存",
-                        icon: "form"
-                    }
-                }, {
-                    path: "index2",
-                    name: "statistics_index2",
-                    component: () => import("@/views/Home.vue"),
-                    meta: {
-                        title: "流失用户",
-                        icon: "form"
-                    }
-                }
-            ]
-        }, {
+        },
+        // {
+        //     path: "/statistics",
+        //     // name: "statistics",
+        //     component: Main,
+        //     meta: {
+        //         title: "统计分析",
+        //         icon: ""
+        //     },
+        //     children: [
+        //         {
+        //             path: "/",
+        //             name: "statistics_index",
+        //             component: () => import("@/views/Home.vue"),
+        //             meta: {
+        //                 title: "用户留存"
+        //                 // icon: "form"
+        //             }
+        //         }, {
+        //             path: "index2",
+        //             name: "statistics_index2",
+        //             component: () => import("@/views/Home.vue"),
+        //             meta: {
+        //                 title: "流失用户"
+        //                 // icon: "form"
+        //             }
+        //         }
+        //     ]
+        // },
+        {
             path: "/login",
             name: "login",
             component: () => import("@/views/Login.vue")
-        }, {
+        },
+        {
             path: "*",
             name: "404",
             component: Main,
@@ -142,7 +146,7 @@ router.beforeEach((to, form, next) => {
         if (!LocalStore.get("token")) {
             next({
                 path: "/login"
-            })
+            });
         } else {
             next();
         }

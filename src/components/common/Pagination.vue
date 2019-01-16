@@ -18,18 +18,18 @@ export default {
     },
     methods: {
         prev_page(event) {
-            this.$emit("prev", event)
+            this.$emit("prev", event);
         },
         next_page(event) {
-            this.$emit("next", event)
+            this.$emit("next", event);
         }
     }
-}
+};
 </script>
 <style lang="stylus" scoped>
 .page {
     text-align: center;
-    
+
     span {
         margin: 0 5px 0 5px;
     }

@@ -1,14 +1,19 @@
 <template>
     <nav class="sidebar">
         <ul class="sidebar-content">
-            <li v-for="route in routes" class="group">
-                <div v-if="!route.hidden&&route.meta" class="group-title">
+            <li v-for="(route, index) in routes" :key="index" class="group">
+                <div
+                    v-if="!route.hidden&&route.meta"
+                    class="group-title"
+                >
                     <m-icon v-if="route.meta&&route.meta.icon" :icon-class="route.meta.icon"/>
                     {{route.meta.title}}
                 </div>
                 <ul v-if="!route.hidden">
                     <li
-                        v-for="child in route.children" v-if="!child.hidden&&child.meta"
+                        v-for="(child, index) in route.children"
+                        :key="index"
+                        v-if="!child.hidden&&child.meta"
                         :class="[child.name == $route.name ? 'active': '']"
                     >
                         <router-link :to="{name: child.name}">
@@ -23,13 +28,13 @@
 </template>
 <script>
 export default {
-    name: "sidebar",
+    name: "Sidebar",
     created() {
 
     },
     methods: {
         linkTo(name) {
-            //this.$router.push({name: name})
+            // this.$router.push({name: name})
         }
     },
     computed: {
@@ -38,7 +43,7 @@ export default {
             return routes;
         }
     }
-}
+};
 </script>
 <style lang="stylus" scoped>
 .sidebar {

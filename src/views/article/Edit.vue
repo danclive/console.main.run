@@ -68,7 +68,7 @@ import hljs from "highlight.js";
 import { detailArticle, newArticle, updateArticle } from "@/api/article.js";
 
 export default {
-    name: "edit",
+    name: "Edit",
     components: {
         CodeMirror
     },
@@ -102,16 +102,16 @@ export default {
             button1: false,
             button2: false,
             button3: false,
-            renderHtml: '',
+            renderHtml: "",
             canPreview: false
-        }
+        };
     },
     created() {
         this.create();
 
         this.md = new MarkdownIt({
             html: true,
-            typographer:  true,
+            typographer: true,
             highlight: function(str, lang) {
                 if (lang && hljs.getLanguage(lang)) {
                     try {
@@ -120,7 +120,9 @@ export default {
                             hljs.highlight(lang, str, true).value +
                             "</code></pre>"
                         );
-                    } catch (__) {}
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
 
                 // return (
@@ -128,7 +130,7 @@ export default {
                 //   md.utils.escapeHtml(str) +
                 //   "</code></pre>"
                 // );
-                //return hljs.highlightAuto(str).value;
+                // return hljs.highlightAuto(str).value;
                 return (
                     '<pre class="hljs"><code>' +
                     hljs.highlightAuto(str).value +
@@ -141,21 +143,20 @@ export default {
             .use(require("markdown-it-mark"))
             .use(require("markdown-it-checkbox"))
             .use(require("markdown-it-attrs"))
-            .use(require("markdown-it-multimd-table"), {enableMultilineRows: true});
+            .use(require("markdown-it-multimd-table"), { enableMultilineRows: true });
     },
     mounted() {
+        document.onkeydown = function(e) {
+            e = window.event || e;
+            var key = e.keyCode;
+            if (key === 83 && e.ctrlKey) {
+                // 延迟，兼容FF浏览器
+                setTimeout(function() {
+                    // alert('ctrl+s');
+                }, 1);
 
-        document.onkeydown=function (e) { 
-            e=window.event||e;
-            var key=e.keyCode;
-            if(key== 83 && e.ctrlKey){
-                /*延迟，兼容FF浏览器  */
-                setTimeout(function(){
-                    //alert('ctrl+s'); 
-                },1); 
-                    
-                return false;      
-            }    
+                return false;
+            }
         };
     },
     methods: {
@@ -174,7 +175,7 @@ export default {
             if (article_id) {
                 this.isUpdate = true;
                 this.article.id = article_id;
-                this.fetchData()
+                this.fetchData();
             } else {
                 this.isUpdate = false;
                 this.button1 = true;
@@ -188,9 +189,9 @@ export default {
                 this.button1 = false;
                 this.button3 = false;
 
-                if (this.article.status == 0) {
+                if (this.article.status === 0) {
                     this.button2 = true;
-                } else if (this.article.status == 2) {
+                } else if (this.article.status === 2) {
                     this.button1 = true;
                     this.button3 = true;
                 }
@@ -201,62 +202,62 @@ export default {
 
             if (this.article.id) {
                 updateArticle(this.article.id, this.article).then(response => {
-                    //console.log(response)
-                    //this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                    // console.log(response)
+                    // this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             } else {
                 newArticle(this.article).then(response => {
-                    //console.log(response)
-                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                    // console.log(response)
+                    this.$router.push({ name: "article_edit", params: { id: response.data.article_id }});
                 });
             }
 
-            //this.create();
+            // this.create();
         },
         button2click() {
             updateArticle(this.article.id, this.article).then(response => {
-                //console.log(response)
-                //this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                // console.log(response)
+                // this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
             });
 
-            //this.create();
+            // this.create();
         },
         button3click() {
             if (this.article.id) {
                 updateArticle(this.article.id, this.article).then(response => {
-                    //console.log(response)
-                    //this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                    // console.log(response)
+                    // this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
                 });
             } else {
                 this.article.status = 2;
 
                 newArticle(this.article).then(response => {
-                    //console.log(response)
-                    this.$router.push({name: "article_edit", params: {id: response.data.article_id}});
+                    // console.log(response)
+                    this.$router.push({ name: "article_edit", params: { id: response.data.article_id }});
                 });
             }
 
-            //this.create();
+            // this.create();
         },
         render() {
             this.renderHtml = this.md.render(this.article.content);
         }
     },
     watch: {
-        "$route" (val, old) {
+        "$route"(val, old) {
             const article_id = this.$route.params.id;
 
             if (article_id) {
                 this.isUpdate = true;
                 this.article.id = article_id;
-                this.fetchData()
+                this.fetchData();
             } else {
                 this.isUpdate = false;
                 this.button1 = true;
                 this.button3 = true;
             }
         },
-        "article.content" (val, old) {
+        "article.content"(val, old) {
             setTimeout(this.render, 100);
         }
     }
@@ -266,35 +267,35 @@ export default {
 <style lang="stylus" scoped>
 .section {
     height: 100%;
-    
+
     .box {
-        
+
         .function {
             border-bottom: 1px solid #F5F5F5;
             padding: 10px 0;
-            
+
             button {
                 margin-right: 4px;
             }
         }
-        
+
         .title {
             input {
                 box-shadow: none;
                 border-bottom: 1px solid #F5F5F5;
             }
         }
-        
+
         .description {
             textarea {
                 box-shadow: none;
                 border-bottom: 1px solid #F5F5F5;
             }
         }
-        
+
         .thumb {
             border-bottom: 1px solid #F5F5F5;
-            
+
             .image {
                 padding: 5px 0 0 0;
                 img {
@@ -302,23 +303,23 @@ export default {
                 }
             }
         }
-        
+
         .editor {
             font-size: 1.6rem;
             padding: 10px;
         }
-        
+
         .preview {
             padding: 10px;
             border-left: 1px solid #F5F5F5;
-            
+
             .content {
 
             }
         }
     }
-    
-/*    
+
+/*
     .preview {
         position: fixed;
         background-color: rgba(0, 0, 0, 0.4);
@@ -327,7 +328,7 @@ export default {
         top: 0;
         right: 0;
         z-index: 999;
-        
+
         .preview-main {
             position: relative;
             margin: 0 auto;
@@ -336,16 +337,16 @@ export default {
             background: #ffffff;
             overflow-y: auto;
             padding: 10px;
-            
+
             .close {
                 position: absolute;
                 right: 10px;
             }
-            
+
             .title {
                 text-align: center;
             }
-            
+
             .content {
                 img {
                     max-width: 100%;
@@ -355,7 +356,7 @@ export default {
     }
 */
     //display: flex;
-    
+
     // .section-content {
     //     flex: 1 0 auto;
 
@@ -367,14 +368,14 @@ export default {
     //             box-shadow: inset 0 0 0 1px rgba(252, 173, 38, .5);
     //             transition: box-shadow 0.15s ease-in-out;
     //             padding: 10px;
-                
+
     //             &.focus {
     //                 box-shadow: inset 0 0 0 1px #f29e0d;
     //             }
     //         }
     //     }
     // }
-    
+
     // .section-function {
     //     //background: #ff6600;
     //     flex: 0 0 auto;
@@ -384,11 +385,11 @@ export default {
 
 </style>
 <style>
-.cm-s-paraiso-light2.CodeMirror { 
-    //background: #e7e9db; 
-    //color: #41323f;
+.cm-s-paraiso-light2.CodeMirror {
+    // background: #e7e9db;
+    // color: #41323f;
     color: #424242;
-    //height: 760px;
+    // height: 760px;
 }
 .cm-s-paraiso-light2 div.CodeMirror-selected {
     background: #b9b6b0;
@@ -425,7 +426,6 @@ export default {
 
 .cm-s-paraiso-light2 .CodeMirror-activeline-background { background: #CFD1C4; }
 .cm-s-paraiso-light2 .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
-
 
 .CodeMirror-simplescroll-horizontal div, .CodeMirror-simplescroll-vertical div {
   position: absolute;

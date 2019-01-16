@@ -3,13 +3,16 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import UI from "../../web.main.run/src/ui"
+import "@/icons";
+
+import "@/assets/css/arita-heiti.css";
+import UI from "../../web.main.run/src/ui";
 Vue.use(UI);
-import "../../web.main.run/src/ui/style/style.styl"
+import "../../web.main.run/src/ui/style/style.styl";
 
 Vue.config.productionTip = false;
 
-var app = new Vue({
+new Vue({
     router,
     store,
     render: h => h(App)

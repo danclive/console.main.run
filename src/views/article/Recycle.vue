@@ -9,8 +9,10 @@
         ></pagination>
         <article-list
             :articles="articles"
-            edit @edit="edit"
-            restore @restore="restore"
+            edit
+            @edit="edit"
+            restore
+            @restore="restore"
         ></article-list>
         <pagination
             :page="listQuery.page"
@@ -21,13 +23,12 @@
         ></pagination>
     </section>
 </template>
-
 <script>
-import Pagination from "@/components/common/Pagination"
-import ArticleList from "@/components/article/ArticleList"
+import Pagination from "@/components/common/Pagination";
+import ArticleList from "@/components/article/ArticleList";
 import { listArticle, restoreArticle } from "@/api/article.js";
 export default {
-    name: "article_index",
+    name: "ArticleIndex",
     components: {
         Pagination,
         ArticleList
@@ -41,7 +42,7 @@ export default {
             },
             articles: [],
             count: 0
-        }
+        };
     },
     created() {
         this.fecthDate();
@@ -67,7 +68,7 @@ export default {
             });
         },
         edit(id) {
-            this.$router.push({name: "article_edit", params: {id: id}})
+            this.$router.push({ name: "article_edit", params: { id: id }});
         },
         restore(params) {
             restoreArticle(params.id).then(response => {
@@ -97,9 +98,9 @@ export default {
 <style lang="stylus" scoped>
 .section {
     height: 100%;
-    
+
     .function {
         //margin-bottom: 10px;
-    }  
+    }
 }
 </style>

@@ -5,7 +5,7 @@
 <script>
 window.CodeMirror = require("codemirror");
 require("codemirror/lib/codemirror.css");
-//require("codemirror/mode/meta");
+// require("codemirror/mode/meta");
 require("codemirror/mode/gfm/gfm.js");
 require("codemirror/mode/xml/xml.js");
 require("codemirror/mode/cmake/cmake.js");
@@ -22,7 +22,7 @@ require("codemirror/mode/stylus/stylus.js");
 require("codemirror/mode/php/php.js");
 
 export default {
-    name: "codemirror",
+    name: "Codemirror",
     data: function() {
         return {
             content: ""
@@ -143,7 +143,7 @@ export default {
     },
     mounted: function() {
         var _this = this;
-        this.editor = CodeMirror.fromTextArea(this.$el, this.options);
+        this.editor = window.CodeMirror.fromTextArea(this.$el, this.options);
         this.editor.setValue(this.code || this.value || this.content);
         this.editor.on("change", function(cm) {
             _this.content = cm.getValue();

@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import MyHeader from "./Header"
-import MyFooter from "./Footer"
-import Sidebar from "./Sidebar"
+import MyHeader from "./Header";
+import MyFooter from "./Footer";
+import Sidebar from "./Sidebar";
 
 export default {
     components: {
@@ -22,7 +22,7 @@ export default {
         MyFooter,
         Sidebar
     }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -31,11 +31,11 @@ export default {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    
+
     .content {
         flex: 1 0 auto;
         display: flex;
-        
+
         .container {
             flex: 1 0 auto;
             width: 0;

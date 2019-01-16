@@ -28,7 +28,7 @@ export function updateArticle(id, data) {
         url: "/console/article/" + id,
         method: "put",
         data
-    }); 
+    });
 }
 
 export function deleteArticle(id) {

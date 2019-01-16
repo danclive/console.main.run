@@ -1,7 +1,7 @@
 <template>
-    <section class="section">
+    <section class="section background">
         <!-- <m-button @click="aaa">login</m-button> -->
-        <div class="login-form">
+        <div class="login-form glass">
             <div class="form-lable">MAIN.RUN</div>
             <div class="form-input">
                 <m-input design="yoko" lable="用户名" v-model="username"></m-input>
@@ -15,21 +15,21 @@
 </template>
 
 <script>
-import { login } from "@/api/user.js";
+// import { login } from "@/api/user.js";
 export default {
-    name: "login",
+    name: "Login",
     data() {
         return {
             username: "",
             password: ""
-        }
+        };
     },
     methods: {
         login() {
-            this.$store.dispatch("Login", {username: this.username, password: this.password}).then(() => {
-                this.$router.push({name: "home"});
+            this.$store.dispatch("Login", { username: this.username, password: this.password }).then(() => {
+                this.$router.push({ name: "home" });
             }).catch(() => {
-                //console.log("222");
+                // console.log("222");
             });
         }
     }
@@ -37,28 +37,38 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+//import "../../web.main.run/src/ui/style/glass.styl"
+
 .section {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
+    //background("../assets/background.jpg")
+
     .login-form {
+        //width: 300px;
+        //background-color: #ffffff;
+        //border: 1px solid #F5F5F5;
+
         width: 300px;
-        background-color: #ffffff;
-        border: 1px solid #F5F5F5;
-        
+        //height: 400px;
+        position: absolute;
+        //border-radius: 8px;
+        //glass("../assets/background.jpg")
+
         .form-lable {
             font-size: 2rem;
             text-align: center;
             padding-top: 20px;
             color: #fcad26;
         }
-        
+
         .form-input {
             padding: 10px 5px 0 5px;
         }
-        
+
         .form-submit {
             padding: 20px 0 20px 0;
             text-align: center;

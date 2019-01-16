@@ -8,7 +8,7 @@
             @next="next_page"
         ></pagination>
         <div class="list-style-sep Grid">
-            <div class="item Cell -mb-c2of10" v-for="(collect, index) in collects" :key="collect.id">
+            <div class="item Cell -mb-c2of10" v-for="collect in collects" :key="collect.id">
                 <div class="box">
                     <div class="img" v-if="collect.image.length > 0">
                         <img :src="collect.image[0]">
@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import Pagination from "@/components/common/Pagination"
-import { listCollect, deleteArticle } from "@/api/collect.js"
+import Pagination from "@/components/common/Pagination";
+import { listCollect } from "@/api/collect.js";
 export default {
-    name: "collect",
+    name: "Collect",
     components: {
         Pagination
     },
@@ -54,7 +54,7 @@ export default {
             },
             collects: [],
             count: 0
-        }
+        };
     },
     created() {
         this.fecthDate();
@@ -64,7 +64,7 @@ export default {
             listCollect(this.listQuery).then(response => {
                 this.collects = response.data.collects;
                 this.count = response.data.count;
-                console.log(response)
+                // console.log(response);
             });
         },
         next_page() {
@@ -74,7 +74,7 @@ export default {
         prev_page() {
             this.listQuery.page -= 1;
             this.fecthDate();
-        },
+        }
     },
     computed: {
         has_next_page() {

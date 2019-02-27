@@ -3,7 +3,7 @@
         <div class="function">
             <!-- <m-button>上传</m-button> -->
             <vue-core-image-upload
-                :class="['m-button-default']"
+                :class="['m-button small']"
                 :crop="false"
                 @imageuploaded="imageuploaded"
                 text="上传"
@@ -18,11 +18,11 @@
             @prev="prev_page"
             @next="next_page"
         ></pagination>
-        <div class="list-style-sep Grid">
-            <div class="item Cell -mb-c2of10" v-for="media in medias" :key="media.id">
+        <div class="list">
+            <div class="item" v-for="media in medias" :key="media.id">
                 <div class="box">
-                    <div class="img">
-                        <img :src="media.url + '?imageView2/1/w/600/h/256/q/75'">
+                    <div class="thumb">
+                        <img :src="media.url + '?imageView2/1/w/280/h/200/q/75'">
                     </div>
                     <div class="content">
                         <div class="title">

@@ -12,12 +12,12 @@
                 <m-input type="text" v-model="article.title" placeholder="标题"></m-input>
             </div>
             <div class="description">
-                <m-textarea :rows="5" class="m-textarea" v-model="article.summary" placeholder="摘要"></m-textarea>
+                <m-textarea :rows="4" class="m-textarea" v-model="article.summary" placeholder="摘要"></m-textarea>
             </div>
         </div>
         <div class="box">
-            <!-- <div class="thumb">
-                <div class="form">
+            <div class="thumb">
+                <div class="m-form">
                     <div class="field half first">
                         <label>封面图1</label>
                         <m-input size="small" special lable="标题" v-model="article.image[0]"></m-input>
@@ -34,20 +34,8 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </div> -->
-        </div>
-        <!-- <div class="box">
-            <div class="editor">
-                <code-mirror v-model="article.content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
             </div>
         </div>
-        <div class="preview" v-if="canPreview">
-            <div class="preview-main">
-                <div class="close"><m-button class="" special size="small" @click="colsePreview">关闭</m-button></div>
-                <div class="title"><h1>{{article.title}}</h1></div>
-                <div class="content" v-html="renderHtml"></div>
-            </div>
-        </div> -->
         <div class="box Grid">
             <div class="editor Cell -mb-c5of10">
                 <code-mirror v-model="article.content" :options="editorOption" @inputRead="refresh" @focus="focus" @blur="blur"></code-mirror>
@@ -318,69 +306,6 @@ export default {
             }
         }
     }
-
-/*
-    .preview {
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.4);
-        height: 100%;
-        width: 100%;
-        top: 0;
-        right: 0;
-        z-index: 999;
-
-        .preview-main {
-            position: relative;
-            margin: 0 auto;
-            max-width: 1200px;
-            height: 100%;
-            background: #ffffff;
-            overflow-y: auto;
-            padding: 10px;
-
-            .close {
-                position: absolute;
-                right: 10px;
-            }
-
-            .title {
-                text-align: center;
-            }
-
-            .content {
-                img {
-                    max-width: 100%;
-                }
-            }
-        }
-    }
-*/
-    //display: flex;
-
-    // .section-content {
-    //     flex: 1 0 auto;
-
-    //     .wrapper {
-    //         margin: 0 auto;
-    //         width: 760px;
-
-    //         .editor {
-    //             box-shadow: inset 0 0 0 1px rgba(252, 173, 38, .5);
-    //             transition: box-shadow 0.15s ease-in-out;
-    //             padding: 10px;
-
-    //             &.focus {
-    //                 box-shadow: inset 0 0 0 1px #f29e0d;
-    //             }
-    //         }
-    //     }
-    // }
-
-    // .section-function {
-    //     //background: #ff6600;
-    //     flex: 0 0 auto;
-    //     width: 300px;
-    // }
 }
 
 </style>
@@ -461,10 +386,10 @@ export default {
 }
 
 .cm-s-paraiso-light2 span.cm-header-1 {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
 }
 .cm-s-paraiso-light2 span.cm-header-2 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
 }
 .cm-s-paraiso-light2 span.cm-header-3 {
     font-size: 2rem;
